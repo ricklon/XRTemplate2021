@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/PlaneTracker2.unity
+    guid: 09fcfc5dd620e45bdab3070046385356
+  - enabled: 1
+    path: Assets/DepthOcclusionExample.unity
+    guid: 479d50e9a8dd3417ebe80e082a33db2b
   m_configObjects: {}

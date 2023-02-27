@@ -149,7 +149,7 @@ namespace Niantic.ARDK.Configuration
     public override string GetArdkVersion()
     {
       // This doesn't work without the native plugin :(
-      return "0.0.0";
+      return "2.4.2";
     }
 
     public override string GetUserId()

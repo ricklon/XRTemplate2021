@@ -54,8 +54,7 @@ namespace Niantic.ARDK.Utilities
           
           // On Apple Silicon, don't use the Rosetta version of Unity but download Apple Silicon version
           const string siliconMessage =
-            "Native ARDK support is unavailable in Unity Editors running through Rosetta on Apple Silicon MacBooks. " +
-            "Please open this project in a version of Unity that runs natively on Apple Silicon.";
+            "For the best ARDK experience we recommend using Native Unity version on Apple silicon devices";
         
           EditorUtility.DisplayDialog(DIALOG_TITLE, siliconMessage, "OK");
           PlayerPrefs.SetInt(SAW_PLATFORM_DIALOG_KEY, 1);
