@@ -52,6 +52,7 @@ namespace Niantic.ARDK.Internals
       nonNativeCompatibilityFilesChangedToBeEnabled = EnforceRosettaBasedCompatibility();
       
 #if !REQUIRE_MANUAL_STARTUP
+      _InitializeTelemetry();
       if (!nonNativeCompatibilityFilesChangedToBeEnabled)
       {
         _InitializeNativeLibraries();
@@ -65,11 +66,8 @@ namespace Niantic.ARDK.Internals
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Startup()
     {
-#if AR_NATIVE_SUPPORT
 #if !REQUIRE_MANUAL_STARTUP
-      _InitializeNativeLibraries();
-      _SetCSharpInitializationMetadata();
-#endif
+      _StandardStartup();
 #endif
     }
     
@@ -79,7 +77,14 @@ namespace Niantic.ARDK.Internals
     /// </summary>
     public static void ManualStartup()
     {
+      _StandardStartup();
+    }
+
+    private static void _StandardStartup()
+    {
+      _InitializeTelemetry();
       _InitializeNativeLibraries();
+      _SetCSharpInitializationMetadata();
     }
 
     /// <summary>
@@ -88,9 +93,6 @@ namespace Niantic.ARDK.Internals
     private static void _InitializeNativeLibraries()
     {
 #if (AR_NATIVE_SUPPORT || UNITY_EDITOR_OSX)
-      // start the telemetry service
-      InitializeTelemetry();
-      
       try
       {
         // TODO(sxian): Remove the _ROR_CREATE_STARTUP_SYSTEMS() after moving the functionalities to
@@ -267,7 +269,7 @@ namespace Niantic.ARDK.Internals
 
 #endif
 
-    private static void InitializeTelemetry()
+    private static void _InitializeTelemetry()
     {
       _telemetryService = _TelemetryService.Instance;
       _telemetryService.Start(Application.persistentDataPath);
